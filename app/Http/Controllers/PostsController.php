@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 // add Post model for using its functions
 use App\Post;
+use App\User;
+use App\Comment;
 
 // this controller made with command:
 // php artisan make:controller PostsController --resource
@@ -81,7 +83,11 @@ class PostsController extends Controller
      */
     public function show($id)
     {
+
         $post = Post::find($id);
+        // $comments = Comment::all()->find($id)
+
+        // dd($post->comments);
         return view('posts.show')->with('post', $post);
     }
 

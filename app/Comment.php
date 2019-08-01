@@ -16,7 +16,7 @@ class Comment extends Model
     // ];
 
 
-    public function user() {
+    public function creator() {
         return $this->belongsTo('App\User');
     }
 

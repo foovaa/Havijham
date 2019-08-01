@@ -27,6 +27,8 @@ Route::get('/about', 'PagesController@about');
 // artisan comand => make:controller PostsController --resource
 Route::resource('posts', 'PostsController');
 
+Route::resource('/posts/comment', 'CommentsController');
+
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
