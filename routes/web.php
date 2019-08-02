@@ -19,13 +19,14 @@
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 
+// Route::get('/posts/{id}', 'PostsController@show')->name('posts.show');
 
 // it creates all the routes we need for 
 // functions in the PostsController 
 
 // we create posts controller and so route posts
 // artisan comand => make:controller PostsController --resource
-Route::resource('posts', 'PostsController');
+Route::resource('/posts', 'PostsController');
 
 Route::resource('/posts/comment', 'CommentsController');
 
