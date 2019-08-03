@@ -30,7 +30,7 @@
         @auth
         @if (auth()->user()->id == $item->creator->id)
             <span class="float-right">
-                <a href="/posts/comment/{{ $item->id }}/edit"><small>Edit</small></a>
+                <a href="/comment/{{ $item->id }}/edit"><small>Edit</small></a>
                 {{ Form::open(['action' => ['CommentsController@destroy' , $item->id], 'method' => 'DELETE']) }}
                     {{ Form::submit('delete') }}
                 {{ Form::close()}}

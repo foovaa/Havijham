@@ -85,9 +85,11 @@ class PostsController extends Controller
     {
 
         $post = Post::find($id);
-        // $comments = Comment::all()->find($id)
-
-        // dd($post->comments);
+        // $comments = Comment::all()->find($id);
+        // dd($post->comments->all());
+        // foreach ($post->comments->all() as $item ) {
+        //     echo "{$item->creator->name}";
+        // }
         return view('posts.show')->with('post', $post);
     }
 

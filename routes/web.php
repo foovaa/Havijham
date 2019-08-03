@@ -27,8 +27,10 @@ Route::get('/about', 'PagesController@about');
 // we create posts controller and so route posts
 // artisan comand => make:controller PostsController --resource
 Route::resource('/posts', 'PostsController');
+Route::get('/posts/{post}', ['uses' => 'PostsController@show', 'as' => 'posts.show']);
 
-Route::resource('/posts/comment', 'CommentsController');
+
+Route::resource('/comment', 'CommentsController');
 
 Auth::routes();
 

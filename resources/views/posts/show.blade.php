@@ -29,17 +29,19 @@
         <small>{{ $item->creator->name }} says</small>
         @auth
         @if (auth()->user()->id == $item->creator->id)
-            <span class="float-right">
-                <a href="/posts/comment/{{ $item->id }}/edit"><small>Edit</small></a>
+            <div class="float-right">
+                <span><a href="/comment/{{ $item->id }}/edit"><small>Edit</small></a></span>
+            <span>
                 {{ Form::open(['action' => ['CommentsController@destroy' , $item->id], 'method' => 'DELETE']) }}
-                    {{ Form::submit('delete') }}
+                    {{ Form::submit('delete', ['class' => 'btn btn-default']) }}
                 {{ Form::close()}}
             </span>
+            </div>
         @endif    
         @endauth
         <hr>
         <p style="font-size:15px;">{{ $item->content }}</p>
-        {{-- <div class="card card"></div> --}}
+        <div class="card card"></div>
     </div>    
 @empty
     <p>there is no comment</p>

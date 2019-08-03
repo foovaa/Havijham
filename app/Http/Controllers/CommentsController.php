@@ -138,7 +138,7 @@ class CommentsController extends Controller
         $comment->save();
 
         // so we must redirect the page to the posts page
-        return view('posts.show')->with('post', $post);
+        return redirect()->route('posts.show', $post);
     }
 
     /**
@@ -149,12 +149,15 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
+        // STATIC $temp;
         $comment = Comment::find($id);
+        $post = Post::find($comment->post->id);
 
         if (auth()->user()->id !== $comment->creator->id) {
-            return view('posts.show')->with('post', $comment->post);
+            return redirect()->route('posts.show', $post);
         }
+
         $comment->delete();
-        return view('posts.show')->with('post', $comment->post);
+        return redirect()->route('posts.show', $post);
     }
 }

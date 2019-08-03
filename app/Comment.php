@@ -3,12 +3,15 @@
 namespace App;
 
 
+use App\User;
+use App\Post;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
 
-    protected $fillable = ['content', 'creator_id', 'post_id'];
+    protected $fillable = ['content'];
 
 
 
