@@ -5,35 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-use App\User;
-use Image;
 use Auth;
+use Image;
 
-class DashboardController extends Controller
+class ProfileController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    public function profile() {
+        return view('profile.profile')->with('user', Auth::user());
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        // return $user->posts;
-        return view('dashboard')->with('user', $user);
-    }
-
 
     public function update(Request $request) {
         // in here we need interventioni/image
@@ -51,8 +30,7 @@ class DashboardController extends Controller
         }
 
 
-        return view('dashboard')->with('user', Auth::user());
+        return view('profile.profile')->with('user', Auth::user());
     }
-
 
 }

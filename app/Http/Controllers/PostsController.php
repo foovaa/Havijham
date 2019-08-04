@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
+use Session;
 // add Post model for using its functions
 use App\Post;
 use App\User;
@@ -72,7 +73,10 @@ class PostsController extends Controller
         $post->save();
 
         // so we must redirect the page to the posts page
-        return redirect('/posts')->with('success', 'Post created');
+        Session::flash('success', 'Post created');
+        return redirect('dashboard')->with('user', Auth::user());
+        
+        // return redirect('/posts')->with('success', 'Post created');
     }
 
     /**
@@ -133,7 +137,11 @@ class PostsController extends Controller
         $post->save();
 
         // so we must redirect the page to the posts page
-        return redirect('/posts')->with('success', 'Post Updated');
+        Session::flash('success', 'Post Edited');
+        return redirect('dashboard')->with('user', Auth::user());
+
+
+        // return redirect('/posts')->with('success', 'Post Updated');
     }
 
     /**
@@ -148,10 +156,14 @@ class PostsController extends Controller
 
         // check for unauthorized user
         if (auth()->user()->id !== $post->user_id) {
-            return redirect('/posts')->with('error', 'Unauthorized user');
-        }
+        return redirect('dashboard')->with('user', Auth::user());
+        // return redirect('/posts')->with('error', 'Unauthorized user');
+    }
         $post->delete();
-        return redirect('/posts')->with('success', 'Post Removed');
+
+        Session::flash('error', 'Post Deleted');
+        return redirect('dashboard')->with('user', Auth::user());
         
+        // Seossion::flash('Post removed');
     }
 }

@@ -34,14 +34,18 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            <span class="caret">
+                                <img src="/storage/avatar/{{ Auth::user()->avatar }}" style="width:30px; height:30px; border-radius:50%; margin-right:20px; float:left; posistion:absolute;">
+                            </span>
+                                {{ Auth::user()->name }} 
                         </a>
                         
 
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
-
+                            
+                            {{-- <a href="{{ route('profile') }}" class="dropdown-item fa-sign-out">Profile</a> --}}
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">

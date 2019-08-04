@@ -35,3 +35,5 @@ Route::resource('/comment', 'CommentsController');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::post('/dashboard/update', 'DashboardController@update')->name('update');
+// Route::post('/profile', 'ProfileController@update');

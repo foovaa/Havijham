@@ -81,7 +81,8 @@ class CommentsController extends Controller
         $comment->save();
 
         // so we must redirect the page to the posts page
-        return view('posts.show')->with('post', $post);
+        return redirect()->route('posts.show', $post);
+
     }
 
     /**
