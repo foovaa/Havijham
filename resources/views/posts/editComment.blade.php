@@ -25,9 +25,25 @@
 </div>
 
 @forelse ($comment->post->comments->all() as $item)
+@if ($item->approved)
     <div class="card card-body" style="margin:20px">
         <small>{{ $item->creator->name }} says</small>
         @auth
+        @if (auth()->user()->id == $item->creator->id)
+            {{ Form::open(['action' => ['CommentsController@destroy' , $item->id], 'method' => 'DELETE']) }}
+                <span class="float-right mx-auto"> 
+                    <a class="tooltips" data-toggle="tooltip" data-placement="top" title="Delete">
+                        <button type="submit" onclick="return confirm('Are you sure to delete this comment ?');" style="border: 0; background: none;">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                
+                    </a>
+            {{ Form::close()}}
+                    <a href="/comment/{{ $item->id }}/edit" class="fa fa-edit"></a>
+                </span>
+        @endif    
+    @endauth
+        {{-- @auth
         @if (auth()->user()->id == $item->creator->id)
             <span class="float-right">
                 <a href="/comment/{{ $item->id }}/edit"><small>Edit</small></a>
@@ -36,11 +52,12 @@
                 {{ Form::close()}}
             </span>
         @endif    
-        @endauth
+        @endauth --}}
         <hr>
         <p style="font-size:15px;">{{ $item->content }}</p>
         {{-- <div class="card card"></div> --}}
     </div>    
+    @endif
 @empty
     <p>there is no comment</p>
 @endforelse

@@ -150,15 +150,16 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        // STATIC $temp;
         $comment = Comment::find($id);
         $post = Post::find($comment->post->id);
 
         if (auth()->user()->id !== $comment->creator->id) {
+            Session::flash('error', 'Unauthorized user');
             return redirect()->route('posts.show', $post);
         }
 
         $comment->delete();
+        Session::flash('success', 'Comment delete');
         return redirect()->route('posts.show', $post);
     }
 }

@@ -13,7 +13,8 @@
     </div>
     <div class="form-group">
             {{ Form::label('body', 'Body') }}
-            {{ Form::textarea('body', $post->body, ['class' => 'ckeditor', 'placeholder' => 'Body...']) }}
+            {{ Form::textarea('body', $post->body, ['class' => 'form-control', 'placeholder' => 'Body...']) }}            
+            {{-- {{ Form::textarea('body', $post->body, ['class' => 'ckeditor', 'placeholder' => 'Body...']) }} --}}
     </div>
     {{-- the Form::hidden added for set method to 'PUT' or 'PATCH' --}}
     {{ Form::hidden('_method', 'PUT')}}

@@ -1,14 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+
+{{-- This part showes the Post title and body --}}
 <a href="/posts" class="btn btn-primary" style="margin-left:40px;">بازگشت</a>
 <div style="margin: 20px;">
     <div class="card mx-auto">
         <div class="card-body">
+            <span>
+                <img src="/storage/avatar/{{ $post->user->avatar }}" style="margin: 10px; width:70px; height:70px; border-radius: 50%;" alt="">
+            </span>
+            <span style="margin-left: 20px;">
+                <strong>{{ $post->user->name }}</strong><br>
+                <small>created at {{ $post->created_at }} </small><hr>    
+            </span>
             <h2 class="card-title">{{ $post->title }}</h2>
-            <p class="card-text">{{ $post->body }}</p>
-            <div style="margin: 10px;"><hr>
-                <small>created at {{ $post->created_at }} by {{ $post->user->name }}</small>
+            <p class="card-text">{!! $post->body !!}</p>
+            <div style="margin: 10px;">
                 @auth
                     @if (auth()->user()->id == $post->user_id)
                         <span class="float-right"><a href="/posts/{{ $post->id }}/edit" class="btn btn-primary mx-auto" >ویرایش</a>
@@ -24,33 +32,39 @@
     </div>
 </div>
 
+
+{{-- This section is for showing Comments --}}
 @forelse ($post->comments->all() as $item)
-    <div class="card" style="margin:20px">
-        <div class="card card-body">
-            <small class="float-left">{{ $item->creator->name }} says</small>
-            @auth
-                @if (auth()->user()->id == $item->creator->id)
-                    {{ Form::open(['action' => ['CommentsController@destroy' , $item->id], 'method' => 'DELETE']) }}
-                        <span class="float-right mx-auto"> 
-                            <a class="tooltips" data-toggle="tooltip" data-placement="top" title="Delete">
-                                <button type="submit" onclick="return confirm('Are you sure to delete this comment ?');" style="border: 0; background: none;">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                </button>
-                        
-                            </a>
-                    {{ Form::close()}}
-                            <a href="/comment/{{ $item->id }}/edit" class="fa fa-edit"></a>
-                        </span>
-                @endif    
-            @endauth
-            <hr>
-                <p style="font-size:15px;">{{ $item->content }}</p>
+    @if ($item->approved == true)
+        <div class="card" style="margin:20px">
+            <div class="card card-body">
+                <small class="float-left">{{ $item->creator->name }} says</small>
+                @auth
+                    @if (auth()->user()->id == $item->creator->id)
+                        {{ Form::open(['action' => ['CommentsController@destroy' , $item->id], 'method' => 'DELETE']) }}
+                            <span class="float-right mx-auto"> 
+                                <a class="tooltips" data-toggle="tooltip" data-placement="top" title="Delete">
+                                    <button type="submit" onclick="return confirm('Are you sure to delete this comment ?');" style="border: 0; background: none;">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
+                            
+                                </a>
+                        {{ Form::close()}}
+                                <a href="/comment/{{ $item->id }}/edit" class="fa fa-edit"></a>
+                            </span>
+                    @endif    
+                @endauth
+                <hr>
+                    <p style="font-size:15px;">{!! $item->content !!}</p>
+            </div>
         </div>
-    </div>
-@empty
+@endif
+        @empty
     <small style="direction:rtl; float:right;">نظری نوشته نشده...</small>
 @endforelse
 
+
+{{-- This section is for create Comments --}}
 @auth
     <div class="card col-md-10" style="margin-top:20px; margin-left:80px;">
         <div class="card-body">
