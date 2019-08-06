@@ -1,0 +1,30 @@
+@font-face {
+    font-family: iransans, Nunito;
+    font-size: 40px;
+    src: url('fonts/iransans.ttf');
+}
+
+
+body {
+    direction: rtl !important;
+    font-family: iransans;
+}
+
+code {
+    direction: ltr !important;
+    background-color: #222222;
+    border: 1px solid green;
+    border-radius: 5px;
+    display: block;
+    padding: 15px;
+    color: white;
+}
+
+div {
+    direction: rtl !important;
+}
+
+a {
+    font-size: 20px;
+}
+

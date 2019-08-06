@@ -13,7 +13,7 @@
                     Email Address:<strong> {{ Auth::user()->email }}</strong>
                     @if ($user->is_admin)
                     <div style="float:right;">
-                            <a href="/dashboard/{{ $user->id }}/admin" class="btn btn-success">Check</a>
+                            <a href="/dashboard/{{ $user->id }}/admin" class="btn btn-success">Admin</a>
                             {{-- <a href="/dashboard/comments" class="btn btn-success">Comments</a> --}}
                     </div>
                 @endif

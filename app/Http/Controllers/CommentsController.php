@@ -136,6 +136,7 @@ class CommentsController extends Controller
         $comment->content = $request->content;
         $comment->creator_id = $request->creator_id;
         $comment->post_id = $request->post_id;
+        $comment->approved = false;
         $comment->save();
 
         // so we must redirect the page to the posts page

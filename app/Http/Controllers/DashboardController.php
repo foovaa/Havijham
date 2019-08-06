@@ -90,7 +90,9 @@ class DashboardController extends Controller
             return redirect()->route('pages.check', auth()->user()->id);
             Session::flash('success', 'Post Removed');    
         }
-        return redirect('pages.index')->with('error', 'Unauthorized user');
+        return redirect('/index');
+        Session::flash('error', 'Unathoorized user');
+        // return redirect('pages.index')->with('error', 'Unauthorized user');
     }
 
 
@@ -108,7 +110,9 @@ class DashboardController extends Controller
             return redirect()->route('pages.check', auth()->user()->id);
             Session::flash('success', 'Comment Removed');    
         }
-        return redirect('pages.index')->with('error', 'Unauthorized user');
+        return redirect('/index');
+        Session::flash('error', 'Unathoorized user');
+        // return redirect('pages.index')->with('error', 'Unauthorized user');
     }
 
     public function commentApprove($id) {
@@ -126,7 +130,9 @@ class DashboardController extends Controller
             return redirect()->route('pages.check', auth()->user()->id);
             Session::flash('success', 'Comment approved');    
         }
-        return redirect('pages.index')->with('error', 'Unauthorized user');
+        return redirect('/index');
+        Session::flash('error', 'Unathoorized user');
+        // return redirect('pages.index')->with('error', 'Unauthorized user');
     }
 
     public function postApprove($id) {

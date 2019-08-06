@@ -12,7 +12,7 @@
             </span>
             <span style="margin-left: 20px;">
                 <strong>{{ $post->user->name }}</strong><br>
-                <small>created at {{ $post->created_at }} </small><hr>    
+                <small>ساخته نوشته شده {{ $post->created_at }} :در تاریخ</small><hr>    
             </span>
             <h2 class="card-title">{{ $post->title }}</h2>
             <p class="card-text">{!! $post->body !!}</p>
