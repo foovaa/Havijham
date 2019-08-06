@@ -8,6 +8,8 @@
  */
 
 :root {
+  --bbgc: #cfd1d1;
+  --bgc: #d1f8f8;
   --blue: #3490dc;
   --indigo: #6574cd;
   --purple: #9561e2;
@@ -18,7 +20,7 @@
   --green: #38c172;
   --teal: #4dc0b5;
   --cyan: #6cb2eb;
-  --white: #fff;
+  --white: rgb(199, 199, 199);
   --gray: #6c757d;
   --gray-dark: #343a40;
   --primary: #3490dc;
@@ -67,12 +69,12 @@ section {
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
-  font-size: 0.9rem;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.6;
   color: #212529;
-  text-align: left;
-  background-color: #f8fafc;
+  text-align: right;
+  background-color: var(--bgc);
 }
 
 [tabindex="-1"]:focus {
@@ -96,7 +98,9 @@ h6 {
 }
 
 p {
-  margin-top: 0;
+
+  font-size: 35;
+  margin-top: 3px;
   margin-bottom: 1rem;
 }
 
@@ -231,7 +235,7 @@ caption {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   color: #6c757d;
-  text-align: left;
+  text-align: right
   caption-side: bottom;
 }
 
@@ -3269,13 +3273,13 @@ input[type=button].btn-block {
   left: 0;
   z-index: 1000;
   display: none;
-  float: left;
+  float: right;
   min-width: 10rem;
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 0.9rem;
   color: #212529;
-  text-align: left;
+  text-align: right
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
@@ -4744,7 +4748,19 @@ input[type=button].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: rgb(216, 216, 216);
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.board {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: var(--bbgc);
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
@@ -6143,7 +6159,7 @@ a.close.disabled {
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
-  text-align: left;
+  text-align: right
   text-align: start;
   text-decoration: none;
   text-shadow: none;
@@ -6268,7 +6284,7 @@ a.close.disabled {
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
-  text-align: left;
+  text-align: right
   text-align: start;
   text-decoration: none;
   text-shadow: none;
@@ -6459,7 +6475,7 @@ a.close.disabled {
 .carousel-item {
   position: relative;
   display: none;
-  float: left;
+  float: right;
   width: 100%;
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
@@ -6795,7 +6811,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: #273038 !important;
 }
 
 a.bg-dark:hover,
@@ -10646,7 +10662,7 @@ a.text-dark:focus {
 
 @font-face {
   font-family: iransans, Nunito;
-  font-size: 40px;
+  font-size: 30px;
   src: url(/fonts/iransans.ttf?59101d89f4719d81eafb4130e28f6aa8);
 }
 
@@ -10656,20 +10672,16 @@ body {
 }
 
 code {
+  font-size: 15px;
   direction: ltr !important;
+  text-align: left;
   background-color: #222222;
-  border: 1px solid green;
+  border: 3px solid green;
   border-radius: 5px;
   display: block;
   padding: 15px;
   color: white;
-}
-
-div {
-  direction: rtl !important;
-}
-
-a {
-  font-size: 20px;
+  margin-bottom: 12px;
+  margin-top: 7px;
 }
 

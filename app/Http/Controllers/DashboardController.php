@@ -42,10 +42,10 @@ class DashboardController extends Controller
         // dd($user);
         if (! $user->is_admin) {
             return redirect('/');
-            Session::flash('error', 'Unauthorized user');
+            Session::flash('error', 'کاربر غیر مجاز');
         }
-        $posts = Post::all();
-        $comments = Comment::all();
+        $posts = Post::where('approved', false)->get();
+        $comments = Comment::where('approved', false)->get();
         $data = array(
             'posts' => $posts,
             'comments' => $comments,
@@ -88,11 +88,11 @@ class DashboardController extends Controller
             );
             // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
             return redirect()->route('pages.check', auth()->user()->id);
-            Session::flash('success', 'Post Removed');    
+            Session::flash('success', 'پست مورد نظر پاک شد');    
         }
         return redirect('/index');
-        Session::flash('error', 'Unathoorized user');
-        // return redirect('pages.index')->with('error', 'Unauthorized user');
+        Session::flash('error', 'کاربر غیر مجاز');
+        // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
     }
 
 
@@ -108,11 +108,11 @@ class DashboardController extends Controller
             );
             // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
             return redirect()->route('pages.check', auth()->user()->id);
-            Session::flash('success', 'Comment Removed');    
+            Session::flash('success', 'کامنت شما پاک شد');    
         }
         return redirect('/index');
-        Session::flash('error', 'Unathoorized user');
-        // return redirect('pages.index')->with('error', 'Unauthorized user');
+        Session::flash('error', 'کاربر غیر مجاز');
+        // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
     }
 
     public function commentApprove($id) {
@@ -128,11 +128,11 @@ class DashboardController extends Controller
             );
             // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
             return redirect()->route('pages.check', auth()->user()->id);
-            Session::flash('success', 'Comment approved');    
+            Session::flash('success', 'کامنت تایید شد');    
         }
         return redirect('/index');
-        Session::flash('error', 'Unathoorized user');
-        // return redirect('pages.index')->with('error', 'Unauthorized user');
+        Session::flash('error', 'کاربر غیر مجاز');
+        // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
     }
 
     public function postApprove($id) {
@@ -147,10 +147,10 @@ class DashboardController extends Controller
                 'comments' => $comments,
             );
             return redirect()->route('pages.check', auth()->user()->id);
-            Session::flash('success', 'Post approved');    
+            Session::flash('success', 'پست مورد نظر تایید شد');    
         }
         return redirect('/index');
-        Session::flash('error', 'Unathoorized user');
+        Session::flash('error', 'کاربر غیر مجاز');
     }
 
 }

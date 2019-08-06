@@ -18,26 +18,17 @@
             <div style="margin: 10px;">
                 @auth
                 @if (auth()->user()->is_admin)
-                <span class="float-right" style="margin:5px; float:inline-end;">
-                        <a href="/dashboard/{{ $post->id }}/post" class="fa fa-check"></a></span>
-                        <span class="float-right" style="margin:5px;">
+                <span class="float-left" style="margin:5px; float:inline-end;">
+                        <a href="/dashboard/{{ $post->id }}/post" class="fa fa-check" title="ویرایش"></a></span>
+                        <span class="float-left" style="margin:5px;">
                         {{ Form::open(['action' => ['DashboardController@destroyPost', $post->id], 'method' => 'DELETE']) }}
-                        <a class="tooltips" data-toggle="tooltip" data-placement="top" title="Delete">
+                        <a class="tooltips" data-toggle="tooltip" data-placement="top" title="حذف">
                             <button type="submit" onclick="return confirm('Are you sure to delete this Post ?');" style="border: 0; background: none;">
-                            {{-- {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}} --}}
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                         </a>
                         {{ Form::close() }}
                     </span>
-                    {{-- @if (auth()->user()->id == $post->user_id)
-                        <span class="float-right"><a href="/posts/{{ $post->id }}/edit" class="btn btn-primary mx-auto" >ویرایش</a>
-                            {{ Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'DELETE', 'class' => 'btn btn_danger']) }}
-                                {{ Form::hidden('_method', 'DELETE') }} 
-                                {{ Form::submit('حذف', ['class' => 'btn btn-danger'])}}
-                            {{ Form::close() }}
-                        </span> 
-                    @endif      --}}
                     @endif       
                 @endauth
             </div>

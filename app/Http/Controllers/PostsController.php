@@ -37,8 +37,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
-        // return Post::all();
+        $posts = Post::where('approved', '1')->orderBy('created_at', 'desc')->paginate(10);
+
         return view('posts.index')->with('posts', $posts);
     }
 
@@ -73,10 +73,10 @@ class PostsController extends Controller
         $post->save();
 
         // so we must redirect the page to the posts page
-        Session::flash('success', 'Post created');
+        Session::flash('success', 'پست شما پس از بررسی در سایت قرار می گیرد');
         return redirect('dashboard')->with('user', Auth::user());
         
-        // return redirect('/posts')->with('success', 'Post created');
+        // return redirect('/posts')->with('success', 'پست شما پس از بررسی در سایت قرار خواهد گرفت');
     }
 
     /**
@@ -109,7 +109,7 @@ class PostsController extends Controller
 
         // check for unauthorized user
         if (auth()->user()->id !== $post->user_id) {
-            return redirect('/posts')->with('error', 'Unauthorized user');
+            return redirect('/posts')->with('error', 'کاربر غیر مجاز');
         }
 
         return view('posts.edit')->with('post', $post);
@@ -134,10 +134,11 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->approved = false;
         $post->save();
 
         // so we must redirect the page to the posts page
-        Session::flash('success', 'Post Edited');
+        Session::flash('success', 'پست شما پس از بررسی در سایت قرار می گیرد');
         return redirect('dashboard')->with('user', Auth::user());
 
 
@@ -161,7 +162,7 @@ class PostsController extends Controller
     }
         $post->delete();
 
-        Session::flash('error', 'Post Deleted');
+        Session::flash('error', 'پست شما پاک شد');
         return redirect('dashboard')->with('user', Auth::user());
         
         // Seossion::flash('Post removed');

@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Posts</h1>
+    <h1>پست ها</h1>
     @forelse ($posts as $item)
-    @if ($item->approved)
     <div style="margin : 20px;">
         <div class="card card-body" style="direction:rtl !important;"> 
             <a href="/posts/{{ $item->id }}"><h4 class="card-title">{{ $item->title }}</h4></a>
@@ -12,9 +11,8 @@
             <small style="direction:rtl !important;">در تاریخ {{ $item->created_at }} توسط {{ $item->user->name }} نوشته شده</small>
         </div>
     </div>
-    @endif
     @empty
-        <h2>there is no posts</h2>
+        <h2>پستی وجود ندارد</h2>
     @endforelse
     {{ $posts->links() }}
 @endsection

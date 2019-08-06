@@ -8,16 +8,16 @@
     {!! Form::open(['action' => ['PostsController@update', $post->id ], 'method' => 'POST']) !!}
     {{ Form::token() }}
     <div class="form-group">
-        {{ Form::label('title', 'Title') }}
-        {{ Form::text('title', $post->title, ['class' => 'form-control', 'placeholder' => 'Title']) }}
+        {{ Form::label('title', 'عنوان') }}
+        {{ Form::text('title', $post->title, ['class' => 'form-control', 'placeholder' => 'عنوان']) }}
     </div>
     <div class="form-group">
-            {{ Form::label('body', 'Body') }}
-            {{ Form::textarea('body', $post->body, ['class' => 'form-control', 'placeholder' => 'Body...']) }}            
+            {{ Form::label('body', 'محتوا') }}
+            {{ Form::textarea('body', $post->body, ['class' => 'form-control', 'rows' => '20']) }}            
             {{-- {{ Form::textarea('body', $post->body, ['class' => 'ckeditor', 'placeholder' => 'Body...']) }} --}}
     </div>
     {{-- the Form::hidden added for set method to 'PUT' or 'PATCH' --}}
     {{ Form::hidden('_method', 'PUT')}}
-    {{ Form::submit('Update', ['class' => 'btn btn-primary'])}}
+    {{ Form::submit('بروزرسانی', ['class' => 'btn btn-primary'])}}
     {{ Form::close() }}
 @endsection

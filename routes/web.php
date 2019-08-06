@@ -17,7 +17,6 @@
 
 // this step is first step in routing step
 Route::get('/', 'PagesController@index')->name('index');
-Route::get('/about', 'PagesController@about');
 
 // Route::get('/posts/{id}', 'PostsController@show')->name('posts.show');
 

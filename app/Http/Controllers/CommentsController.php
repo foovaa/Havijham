@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Comment;
 use App\Post;
 
+use Session;
+
 class CommentsController extends Controller
 {
 
@@ -108,7 +110,7 @@ class CommentsController extends Controller
 
         // check for unauthorized user
         if (auth()->user()->id !== $comment->creator->id) {
-            return view('posts.editcommit')->with('error', 'Unauthorized user');
+            return view('posts.editcommit')->with('error', 'کاربر غیر مجاز');
         }
 
         return view('posts.editComment')->with('comment', $comment);
@@ -155,12 +157,12 @@ class CommentsController extends Controller
         $post = Post::find($comment->post->id);
 
         if (auth()->user()->id !== $comment->creator->id) {
-            Session::flash('error', 'Unauthorized user');
+            Session::flash('error', 'کاربر غیر مجاز');
             return redirect()->route('posts.show', $post);
         }
 
         $comment->delete();
-        Session::flash('success', 'Comment delete');
+        Session::flash('success', 'کامنت مورد نظر پاک شد');
         return redirect()->route('posts.show', $post);
     }
 }
