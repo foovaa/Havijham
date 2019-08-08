@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('title')
+بلاگ | پست ها
+@endsection
+
+
 @section('content')
 
 {{-- This part showes the Post title and body --}}
@@ -15,7 +20,10 @@
                 <small>ساخته نوشته شده {{ $post->created_at }} :در تاریخ</small><hr>    
             </span>
             <h2 class="card-title">{{ $post->title }}</h2>
-            <p class="card-text">{!! $post->body !!}</p>
+            <p class="card-text">
+                <?php echo nl2br( $post->body ); ?>
+            </p>
+
             <div style="margin: 10px;">
                 @auth
                     @if (auth()->user()->id == $post->user_id)

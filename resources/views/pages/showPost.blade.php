@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+سلام ادمین   
+@endsection
+
 @section('content')
     
 <a href="/posts" class="btn btn-primary" style="margin-left:40px;">بازگشت</a>
@@ -14,7 +18,9 @@
                 <small>created at {{ $post->created_at }} </small><hr>    
             </span>
             <h2 class="card-title">{{ $post->title }}</h2>
-            <p class="card-text">{!! $post->body !!}</p>
+            <p class="card-text">
+                    <?php echo nl2br( $post->body ); ?>
+                </p>
             <div style="margin: 10px;">
                 @auth
                 @if (auth()->user()->is_admin)

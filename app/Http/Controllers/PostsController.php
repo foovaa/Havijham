@@ -89,6 +89,10 @@ class PostsController extends Controller
     {
 
         $post = Post::find($id);
+        if (! $post) {
+            Session::flash('error', 'چنین پستی وجود ندارد');
+            return redirect('/posts');
+        }
         // $comments = Comment::all()->find($id);
         // dd($post->comments->all());
         // foreach ($post->comments->all() as $item ) {

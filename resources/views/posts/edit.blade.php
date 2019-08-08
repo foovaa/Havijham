@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+
+@section('title')
+ویرایش پست
+@endsection
+
+
 @section('content')
     {{-- 
         for editing the posts we must change action to the 'update'  

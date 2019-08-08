@@ -67,13 +67,14 @@ class DashboardController extends Controller
             }
             $avatar = $request->file('avatar');
             $filename = time().'.'.$avatar->getClientOriginalExtension();
-            Image::make($avatar)->resize(200, 200)->save(public_path("storage/avatar/".$filename));
+            Image::make($avatar)->resize(300, 300)->save(public_path("storage/avatar/".$filename));
 
             $user = Auth::user();
             $user->avatar = $filename;
             $user->save();
         }
-        return view('pages.dashboard')->with('user', Auth::user());
+        return redirect()->route('dashboard', Auth::user());
+        // return view('pages.dashboard')->with('user', Auth::user());
     }
 
     public function destroyPost($id) {

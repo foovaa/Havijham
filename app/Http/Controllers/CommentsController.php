@@ -83,6 +83,7 @@ class CommentsController extends Controller
         $comment->save();
 
         // so we must redirect the page to the posts page
+        Session::flash('success', 'نظر شما پس از بررسی اعمال خواهد شد');
         return redirect()->route('posts.show', $post);
 
     }
@@ -112,7 +113,6 @@ class CommentsController extends Controller
         if (auth()->user()->id !== $comment->creator->id) {
             return view('posts.editcommit')->with('error', 'کاربر غیر مجاز');
         }
-
         return view('posts.editComment')->with('comment', $comment);
     }
 
@@ -142,6 +142,7 @@ class CommentsController extends Controller
         $comment->save();
 
         // so we must redirect the page to the posts page
+        Session::flash('message', 'نظر شما پس از بررسی اعمال خواهد شد');
         return redirect()->route('posts.show', $post);
     }
 
