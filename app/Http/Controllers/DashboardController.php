@@ -50,14 +50,14 @@ class DashboardController extends Controller
             'posts' => $posts,
             'comments' => $comments,
         );
-        return view('pages.check')->with('data', $data);
+        return view('pages.admin')->with('data', $data);
         // return view('pages.check')->with(['posts' => $posts, 'comments' => $comments]);
     }
 
-    public function postShow($id) {
-        $post = Post::find($id);
-        return view('pages.showPost')->with('post', $post);
-    }
+    // public function postShow($id) {
+    //     $post = Post::find($id);
+    //     return view('pages.showPost')->with('post', $post);
+    // }
 
     public function update(Request $request) {
         // in here we need interventioni/image
@@ -68,90 +68,99 @@ class DashboardController extends Controller
             $avatar = $request->file('avatar');
             $filename = time().'.'.$avatar->getClientOriginalExtension();
             Image::make($avatar)->resize(300, 300)->save(public_path("storage/avatar/".$filename));
-
-            $user = Auth::user();
-            $user->avatar = $filename;
-            $user->save();
+        } else {
+            $filename = Auth::user()->avatar;
         }
+        $user = Auth::user();
+        if ($request->about_me) {
+            $str = $request->about_me;
+            if (strlen($str) > 1000) {
+                $about_me = substr($str, 0, 999);
+            }
+            $user->about_me = $about_me;
+        }
+        $user->avatar = $filename;
+        $user->save();
+
         return redirect()->route('dashboard', Auth::user());
         // return view('pages.dashboard')->with('user', Auth::user());
     }
 
-    public function destroyPost($id) {
-        $post = Post::find($id);
-        if (Auth::user()->is_admin) {
-            $post->delete();
-            $posts = Post::all();
-            $comments = Comment::all();
-            $data = array(
-                'posts' => $posts,
-                'comments' => $comments,
-            );
-            // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
-            return redirect()->route('pages.check', auth()->user()->id);
-            Session::flash('success', 'پست مورد نظر پاک شد');    
-        }
-        return redirect('/index');
-        Session::flash('error', 'کاربر غیر مجاز');
-        // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
-    }
+    // public function destroyPost($id) {
+    //     $post = Post::find($id);
+    //     if (Auth::user()->is_admin) {
+    //         $post->delete();
+    //         $posts = Post::all();
+    //         $comments = Comment::all();
+    //         $data = array(
+    //             'posts' => $posts,
+    //             'comments' => $comments,
+    //         );
+    //         // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
+    //         return redirect()->route('pages.check', auth()->user()->id);
+    //         Session::flash('success', 'پست مورد نظر پاک شد');    
+    //     }
+    //     return redirect('/index');
+    //     Session::flash('error', 'کاربر غیر مجاز');
+    //     // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
+    // }
 
 
-    public function destroyComment($id) {
-        $comment = Comment::find($id);
-        if (Auth::user()->is_admin) {
-            $comment->delete();
-            $posts = Post::all();
-            $comments = Comment::all();
-            $data = array(
-                'posts' => $posts,
-                'comments' => $comments,
-            );
-            // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
-            return redirect()->route('pages.check', auth()->user()->id);
-            Session::flash('success', 'کامنت شما پاک شد');    
-        }
-        return redirect('/index');
-        Session::flash('error', 'کاربر غیر مجاز');
-        // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
-    }
+    // public function destroyComment($id) {
+    //     $comment = Comment::find($id);
+    //     if (Auth::user()->is_admin) {
+    //         $comment->delete();
+    //         $posts = Post::all();
+    //         $comments = Comment::all();
+    //         $data = array(
+    //             'posts' => $posts,
+    //             'comments' => $comments,
+    //         );
+    //         // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
+    //         return redirect()->route('pages.check', auth()->user()->id);
+    //         Session::flash('success', 'کامنت شما پاک شد');    
+    //     }
+    //     return redirect('/index');
+    //     Session::flash('error', 'کاربر غیر مجاز');
+    //     // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
+    // }
 
-    public function commentApprove($id) {
-        $comment = Comment::find($id);
-        if (Auth::user()->is_admin) {
-            $comment->approved = true;
-            $comment->save();
-            $posts = Post::all();
-            $comments = Comment::all();
-            $data = array(
-                'posts' => $posts,
-                'comments' => $comments,
-            );
-            // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
-            return redirect()->route('pages.check', auth()->user()->id);
-            Session::flash('success', 'کامنت تایید شد');    
-        }
-        return redirect('/index');
-        Session::flash('error', 'کاربر غیر مجاز');
-        // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
-    }
+    // public function commentApprove($id) {
+    //     $comment = Comment::find($id);
+    //     if (Auth::user()->is_admin) {
+    //         $comment->approved = true;
+    //         $comment->save();
+    //         $posts = Post::all();
+    //         $comments = Comment::all();
+    //         $data = array(
+    //             'posts' => $posts,
+    //             'comments' => $comments,
+    //         );
+    //         // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
+    //         return redirect()->route('pages.check', auth()->user()->id);
+    //         Session::flash('success', 'کامنت تایید شد');    
+    //     }
+    //     return redirect('/index');
+    //     Session::flash('error', 'کاربر غیر مجاز');
+    //     // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
+    // }
 
-    public function postApprove($id) {
-        $post = Post::find($id);
-        if (auth()->user()->is_admin) {
-            $post->approved = true;
-            $post->save();
-            $posts = Post::all();
-            $comments = Comment::all();
-            $data = array(
-                'posts' => $posts,
-                'comments' => $comments,
-            );
-            return redirect()->route('pages.check', auth()->user()->id);
-            Session::flash('success', 'پست مورد نظر تایید شد');    
-        }
-        return redirect('/index');
-        Session::flash('error', 'کاربر غیر مجاز');
-    }
+    // public function postApprove($id) {
+    //     $post = Post::find($id);
+    //     if (auth()->user()->is_admin) {
+    //         $post->approved = true;
+    //         $post->save();
+    //         $posts = Post::all();
+    //         $comments = Comment::all();
+    //         $data = array(
+    //             'posts' => $posts,
+    //             'comments' => $comments,
+    //         );
+    //         return redirect()->route('pages.check', auth()->user()->id);
+    //         Session::flash('success', 'پست مورد نظر تایید شد');    
+    //     }
+    //     return redirect('/index');
+    //     Session::flash('error', 'کاربر غیر مجاز');
+    // }
 
 }

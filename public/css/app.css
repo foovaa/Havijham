@@ -78,14 +78,8 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: right;
-  /* background-color: var(--bgc); */
-/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#0b2c47+0,49c4f4+100,4acbf9+100,22f9f9+100 */
 
-background: #0b2c47;
-background: -moz-linear-gradient(45deg,  #0b2c47 0%, #49c4f4 100%, #4acbf9 100%, #22f9f9 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(45deg,  #0b2c47 0%,#49c4f4 100%,#4acbf9 100%,#22f9f9 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(45deg,  #0b2c47 0%,#49c4f4 100%,#4acbf9 100%,#22f9f9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0b2c47', endColorstr='#22f9f9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background-image: url('/storage/bg_img.png'), linear-gradient(45deg, hsl(207, 74%, 14%) 0%, #2efafa);
 
 }
 
@@ -4773,6 +4767,7 @@ input[type=button].btn-block {
 }
 
 .board {
+  background-image: url('/storage/bbg_img.png');
   position: relative;
   display: flex;
   flex-direction: column;
@@ -4784,6 +4779,8 @@ input[type=button].btn-block {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 10px;
 }
+
+
 
 .card > hr {
   margin-right: 0;

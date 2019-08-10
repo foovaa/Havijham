@@ -26,7 +26,7 @@
                             <td class="w-25">{{ $item->created_at }}</td>
                             <td class="w-25">
                                 <span style=" float:left; margin-left:30px;">
-                                <a href="/dashboard/{{ $item->id }}/show" class="btn btn-primary">مشاهده</a></span>
+                                <a href="/posts/{{ $item->id }}/show" class="btn btn-primary">مشاهده</a></span>
             @endforeach
         </table>
         @endif
@@ -40,7 +40,7 @@
             <div class="card" style="margin:20px">
                 <div class="card card-body">
                     <small class="float-left"> نویسنده: {{ $item->creator->name }}</small>
-                            {{ Form::open(['action' => ['DashboardController@destroyComment' , $item->id], 'method' => 'POST']) }}
+                            {{ Form::open(['action' => ['CommentsController@destroyComment' , $item->id], 'method' => 'POST']) }}
                             {{ Form::hidden('_method', 'DELETE')}}
                                 <span class="float-left mx-auto"> 
                                     <a class="tooltips" data-toggle="tooltip" data-placement="top" title="Delete">
@@ -50,7 +50,7 @@
                                 
                                     </a>
                             {{ Form::close()}}
-                                    <a href="/dashboard/{{ $item->id }}/comment" class="fa fa-check"></a>
+                                    <a href="/comments/{{ $item->id }}/comment" class="fa fa-check"></a>
                                 </span>
                     <hr>
                         <p style="font-size:15px;">{!! $item->content !!}</p>

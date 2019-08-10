@@ -34,6 +34,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
 
 
@@ -46,7 +47,7 @@
             <div  class="container">
                     <div style="margin:20px;">@include('includes.messages')</div>
                     <main class="py-5">
-                    <div class="board col-md-14">
+                    <div class="board board-img col-md-14">
                         <div class="card-text py-5">
                                 <div class="ml-4" style="margin-right:20px;">
                                         @yield('content')

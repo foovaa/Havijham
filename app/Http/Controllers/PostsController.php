@@ -37,7 +37,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('approved', '1')->orderBy('created_at', 'desc')->paginate(10);
+        $posts = Post::where('approved', true)->orderBy('created_at', 'desc')->paginate(10);
 
         return view('posts.index')->with('posts', $posts);
     }
@@ -171,4 +171,43 @@ class PostsController extends Controller
         
         // Seossion::flash('Post removed');
     }
+
+    // Custom Functions
+
+    public function postShow($id) {
+        $post = Post::find($id);
+        return view('pages.showPost')->with('post', $post);
+    }
+
+
+    public function postApprove($id) {
+        $post = Post::find($id);
+        if (auth()->user()->is_admin) {
+            $post->approved = true;
+            $post->save();
+            return redirect()->route('pages.admin', Auth::user()->id);
+            Session::flash('success', 'پست مورد نظر تایید شد');    
+        }
+        return redirect('/index');
+        Session::flash('error', 'کاربر غیر مجاز');
+    }
+
+
+    public function destroyPost($id) {
+        $post = Post::find($id);
+        if (Auth::user()->is_admin) {
+            $post->delete();
+
+            // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
+            return redirect()->route('pages.admin', auth()->user()->id);
+            Session::flash('success', 'پست مورد نظر پاک شد');    
+        }
+        return redirect('/index');
+        Session::flash('error', 'کاربر غیر مجاز');
+        // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
+    }
+
+
+
+
 }

@@ -1,0 +1,30 @@
+.user-box {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-column-gap: 2em;
+    text-align: right;
+}
+
+.user-box > div {
+    margin: 20px;
+    display: block;
+}
+
+.about-me {
+    max-width: 800px;
+    float: left;
+    display: block;
+    margin: 10px;
+}
+
+
+.w-40 {
+    width: 30% !important;
+}
+  
+.w-60 {
+    width: 70% !important;
+}
+  
+
+

@@ -79,9 +79,8 @@
         {{ Form::open(['action' => 'CommentsController@store', 'method' => 'POST']) }}
         <div class="form-group">
                 <div class="card-body">
-
                 {{ Form::label('label', 'نظر شما', ['class' => 'float-right']) }}
-                {{ Form::textarea('content', '', ['class' => 'form-control', 'rows' => '5']) }}
+                {{ Form::textarea('content', '', ['class' => 'form-control', 'rows' => '3'])}}
                 {{ Form::hidden('post_id' , $post->id) }}
                 {{ Form::hidden('creator_id' , auth()->user()->id) }}
     </div>

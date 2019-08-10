@@ -16,6 +16,9 @@
         <a class="nav-item nav-link" href="{{ url('/posts') }}">
             بلاگ
         </a>
+        <a class="nav-item nav-link" href="{{ route('users') }}">
+            اعضا
+        </a>
     
     </div>
 

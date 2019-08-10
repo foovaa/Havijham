@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Post;
+use Auth;
 
 use Session;
 
@@ -166,4 +167,46 @@ class CommentsController extends Controller
         Session::flash('success', 'کامنت مورد نظر پاک شد');
         return redirect()->route('posts.show', $post);
     }
+
+
+    public function destroyComment($id) {
+        $comment = Comment::find($id);
+        if (Auth::user()->is_admin) {
+            $comment->delete();
+            $posts = Post::all();
+            $comments = Comment::all();
+            $data = array(
+                'posts' => $posts,
+                'comments' => $comments,
+            );
+            // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
+            return redirect()->route('pages.admin', auth()->user()->id);
+            Session::flash('success', 'کامنت شما پاک شد');    
+        }
+        return redirect('/index');
+        Session::flash('error', 'کاربر غیر مجاز');
+        // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
+    }
+
+    public function commentApprove($id) {
+        $comment = Comment::find($id);
+        if (Auth::user()->is_admin) {
+            $comment->approved = true;
+            $comment->save();
+            $posts = Post::all();
+            $comments = Comment::all();
+            $data = array(
+                'posts' => $posts,
+                'comments' => $comments,
+            );
+            // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
+            return redirect()->route('pages.admin', auth()->user()->id);
+            Session::flash('success', 'کامنت تایید شد');    
+        }
+        return redirect('/index');
+        Session::flash('error', 'کاربر غیر مجاز');
+        // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
+    }
+
+
 }

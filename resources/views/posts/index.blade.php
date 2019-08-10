@@ -25,6 +25,8 @@
                     <h4 class="card-title"><strong style="color:blue;">عنوان:</strong> {{ $item->title }}</h4>
                     <hr>
                 <small>{{ $item->created_at->format('Y M D') }}</small>
+                <span class="float-left" style="margin:5px; float:inline-end;">
+                    <a href="/posts/{{ $item->id }}" class="btn btn-primary">مشاهده</a></span>
                 </div>
             </div>
         </div>

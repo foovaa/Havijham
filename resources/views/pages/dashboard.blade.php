@@ -13,30 +13,47 @@
         <div class="col-md-12 col-md-offset-2">
             {{-- This Profile shower --}}
             <div class="card">
-                <div class="card-header" style="margin:20px; display: block; min-width:60px;"><strong style="margin-top:10px; font-size:20px; maargin-right:30px;"> داشبورد</strong>
-                    <img src="/storage/avatar/{{ Auth::user()->avatar }}" style="width:150px; height:150px; float:right; border-radius:50%; margin:10px; margin-right:30px;">                    
-                    <div style="margin-top:15px; margin-left:100px; margin-bottom:10px;">
-                    <br><strong>نام:  {{ Auth::user()->name }}</strong><br>
-                   <strong>آدرس ایمیل:  {{ Auth::user()->email }}</strong>
+                {{-- <div class="profile"> --}}
+                        <div class="card-header" style="margin:20px; display: block; min-width:60px;"><strong style="margin-top:10px; font-size:20px; maargin-right:30px;"> داشبورد</strong>
+                            {{ Form::open(['action' => 'DashboardController@update', 'method' => 'POST', 'enctype' => 'multipart/form-data']) }}    
+                        <span style="float:right">
+                            <figure>
 
-                </div>
-
-                    {{ Form::open(['action' => 'DashboardController@update', 'method' => 'POST', 'enctype' => 'multipart/form-data']) }}
-                    {{ Form::token() }}
-                    <div class="form-group">
-                        {{Form::file('avatar')}}
+                                    <img src="/storage/avatar/{{ Auth::user()->avatar }}" style="width:130px; height:130px; float:right; border-radius:50%; margin:10px; margin-right:30px;">                    
+                                    <figcaption>
+                                            <br><small>    نام</small>
+                                            <br><strong>   {{ Auth::user()->name }}</strong>
+                                            <br><small>    ایمیل</small><br>
+                                            <strong>   {{ Auth::user()->email }}</strong>
+                                    </figcaption>
+                                </figure>
+                            <div class="form-group">
+                                    {{Form::file('avatar')}}
+                                </div>
+                        </span>
+                            <span class="about-me" style="float:left;">
+                            {{ Form::token() }}
+                                    {{ Form::label('about_me', 'درباره من')}}
+                                    {{ Form::textarea('about_me', Auth::user()->about_me, ['class' => 'form-control flote-left', 'rows' => '5', 'style' => 'margin-bottom:20px;']) }}                
+                                    @if ($user->is_admin)
+                                    <div style="float:left; margin-right:5px;">
+                                            <a href="/dashboard/{{ $user->id }}/admin" class="btn btn-success">پنل مدیریت</a>
+                                            {{-- <a href="/dashboard/comments" class="btn btn-success">Comments</a> --}}
+                                    </div>
+                                @endif
+                                    {{ Form::submit('بروز رسانی اطلاعات', ['class' => 'btn btn-primary', 'style' => 'float:left; '])}}
+                                    {{ Form::close() }}
+        
+                                </span>
+        
                     </div>
-                    @if ($user->is_admin)
-                    <div style="float:left; margin-right:5px;">
-                            <a href="/dashboard/{{ $user->id }}/admin" class="btn btn-success">پنل مدیریت</a>
-                            {{-- <a href="/dashboard/comments" class="btn btn-success">Comments</a> --}}
-                    </div>
-                @endif
-                    {{ Form::submit('عکست رو عوض کن', ['class' => 'btn btn-primary', 'style' => 'float:left; '])}}
-                    {{ Form::close() }}
 
+        
                 </div>
-            </div>
+                <div class="card-header" style="margin-top:20px;" >
+                        <strong>درباره من</strong><br><br>
+                        <?php echo nl2br(Auth::user()->about_me) ?>
+                </div>
 
             <div class="card-body">
                 @if (session('status'))
@@ -61,10 +78,10 @@
                     @forelse ($user->posts as $item)
                     <tr class="row">
                         <td class="card-title w-50"><strong>{{ $item->title }}</strong></td>
-                        <td class="w-25">{{ $item->created_at }}</td>
+                        <td class="w-25">{{ $item->created_at->format('Y D M') }}</td>
                         <td class="w-25">
                             <span class="float-left" style="margin:5px; float:inline-end;">
-                            <a href="/posts/{{ $item->id }}" class="btn btn-primary">مشاهده</a></span>
+                                <a href="/posts/{{ $item->id }}" class="btn btn-primary">مشاهده</a></span>
                             {{-- <span class="float-right" style="margin:5px; float:inline-end;">
                             <a href="/posts/{{ $item->id }}/edit" class="btn btn-primary">Edit</a></span>
                             <span class="float-right" style="margin:5px;">
@@ -90,5 +107,4 @@
         </div>
     </div>
 </div>
-
 @endsection
