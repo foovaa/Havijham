@@ -17,9 +17,18 @@
             </span>
             <span style="margin-left: 20px;">
                 <strong>{{ $post->user->name }}</strong><br>
-                <small>ساخته نوشته شده {{ $post->created_at }} :در تاریخ</small><hr>    
+                <small>ساخته نوشته شده {{ $post->created_at }} :در تاریخ</small>
+                @auth
+                <span style="float:left;">
+                    <a href="#" class="like" data-postid="{{ $post->id }}">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ?
+                     Auth::user()->likes()->where('post_id', $post->id)->first()->like == true ? 'شما این پست رو دوست داشتید' : 'دوست داشتم' : 'دوست داشتم' }}</a> |  
+                    <a href="#" class="like" data-postid="{{ $post->id }}">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ?
+                    Auth::user()->likes()->where('post_id', $post->id)->first()->like == false ? 'شما این پست رو دوست نداشتید' : 'دوست نداشتم' : 'دوست نداشتم' }}</a>    
             </span>
-            <h2 class="card-title">{{ $post->title }}</h2>
+            @endauth
+                <hr style="margin-top: 40px;">    
+            </span>
+            <h1 class="card-title">{{ $post->title }}</h1>
             <p class="card-text">
                 <?php echo nl2br( $post->body ); ?>
             </p>
@@ -27,12 +36,11 @@
             <div style="margin: 10px;">
                 @auth
                     @if (auth()->user()->id == $post->user_id)
-                        <span class="float-left"><a href="/posts/{{ $post->id }}/edit" class="btn btn-primary mx-auto" >ویرایش</a>
-                            {{ Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'DELETE', 'class' => 'btn btn_danger']) }}
-                                {{-- {{ Form::hidden('_method', 'DELETE') }} --}}
-                                {{ Form::submit('حذف', ['class' => 'btn btn-danger'])}}
+                        <span class="float-left"><a href="/posts/{{ $post->id }}/edit" class="btn btn-primary"  style='margin-right:10px;'>ویرایش</a></span>
+                            {{ Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'DELETE']) }}
+                                {{ Form::hidden('_method', 'DELETE') }}
+                                <span class="float-left">    {{ Form::submit('حذف', ['class' => 'btn btn-danger'])}} </span>
                             {{ Form::close() }}
-                        </span>
                     @endif            
                 @endauth
             </div>
@@ -93,5 +101,8 @@
 @endauth
 @endsection
 
-
+<script>
+    var token = '{{ Session::token() }}';
+    var likeUrl = '{{ route('like') }}';
+</script>
 

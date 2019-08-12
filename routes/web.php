@@ -28,7 +28,17 @@ Route::get('/users/{user_id}', 'PagesController@user')->name('user');
 // we create posts controller and so route posts
 // artisan comand => make:controller PostsController --resource
 Route::resource('/posts', 'PostsController');
-Route::get('/posts/{post}', ['uses' => 'PostsController@show', 'as' => 'posts.show']);
+Route::get('/posts/{post}', ['uses' => 'PostsController@show', 'as' => 'show']);
+
+// Like
+Route::post('/like', ['uses' => 'PostsController@likePost' , 'as' => 'like']);
+
+// adminstration
+Route::get('posts/{post_id}/show', 'PostsController@postShow');
+Route::get('posts/{post_id}/post', 'PostsController@postApprove');
+Route::get('posts/{post_id}/review', 'PostsController@postReview');
+Route::delete('comments/{comment_id}/destroyComment', 'CommentsController@destroyComment');
+Route::delete('posts/{post_id}/destroyPost', 'PostsController@destroyPost');
 
 
 Route::resource('/comment', 'CommentsController');
@@ -38,20 +48,10 @@ Auth::routes();
 
 // Dashboard and adminstration 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/dashboard/{user_id}/admin',['uses' => 'DashboardController@admin', 'as' => 'pages.admin'] );
-
-// Route::get('dashboard/{comment_id}/comment', 'DashboardController@commentApprove');
-// Route::get('dashboard/{post_id}/show', 'DashboardController@postShow');
-// Route::get('dashboard/{post_id}/post', 'DashboardController@postApprove');
-// Route::delete('dashboard/{comment_id}/destroyComment', 'DashboardController@destroyComment');
-// Route::delete('dashboard/{post_id}/destroyPost', 'DashboardController@destroyPost');
+Route::get('/dashboard/{user_id}/admin',['uses' => 'DashboardController@admin', 'as' => 'admin'] );
 
 
 Route::get('comments/{comment_id}/comment', 'CommentsController@commentApprove');
-Route::get('posts/{post_id}/show', 'PostsController@postShow');
-Route::get('posts/{post_id}/post', 'PostsController@postApprove');
-Route::delete('comments/{comment_id}/destroyComment', 'CommentsController@destroyComment');
-Route::delete('posts/{post_id}/destroyPost', 'PostsController@destroyPost');
 
 
 

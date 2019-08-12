@@ -71,29 +71,41 @@
                 {{-- This section is Posts Table --}}
                 <table class="table table-striped">
                     <tr class="row">
-                        <td class="w-50">عنوان</td>
-                        <td class="w-25">تاریخ نگارش پست</td>
-                        <td class="w-25"></td>
+                        <td class="w-40">عنوان</td>
+                        <td class="w-15">در تاریخ</td>
+                        <td class="w-15">وضعیت</td>
+                        <td class="w-20">پیام</td>
+                        <td class="w-10"></td>
                     </tr>
+
                     @forelse ($user->posts as $item)
                     <tr class="row">
-                        <td class="card-title w-50"><strong>{{ $item->title }}</strong></td>
-                        <td class="w-25">{{ $item->created_at->format('Y D M') }}</td>
-                        <td class="w-25">
-                            <span class="float-left" style="margin:5px; float:inline-end;">
-                                <a href="/posts/{{ $item->id }}" class="btn btn-primary">مشاهده</a></span>
-                            {{-- <span class="float-right" style="margin:5px; float:inline-end;">
-                            <a href="/posts/{{ $item->id }}/edit" class="btn btn-primary">Edit</a></span>
-                            <span class="float-right" style="margin:5px;">
-                            {{ Form::open(['action' => ['PostsController@destroy', $item->id], 'method' => 'DELETE']) }}
-                            <a class="tooltips" data-toggle="tooltip" data-placement="top" title="Delete">
-                                <button type="submit" onclick="return confirm('Are you sure to delete this Post ?');" style="border: 0; background: none;">
-                                {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                                {{-- <i class="fa fa-trash-o" aria-hidden="true"></i> 
-                                </button>
-                            </a>
-                            {{ Form::close() }}
-                        </span> --}}
+                        <td class="card-title w-40"><strong>{{ $item->title }}</strong></td>
+                        <td class="w-15"><small>{{ $item->created_at->format('Y D M') }}</small></td>
+                            @if ( $item->approved )
+                                <td class="w-15">
+                                        <span class="float-right" style=" color:blue;">بررسی شده</span>
+                                </td>
+                                <td class="w-20">
+                                    <span class="float-right" style="color:green;">تایید شد</span>
+                                </td>
+                            @elseif ($item->review) 
+                                <td class="w-15">
+                                        <span class="float-right" style="color:blue;">بررسی شده</span>
+                                </td>
+                                <td class="w-20">
+                                    <span class="float-right" style="color:red;">برای بازبینی</span>
+                                </td>
+                                @else
+                                    <td class="w-15">
+                                            <span class="float-right" style="color:yellow;">بررسی نشده</span>
+                                    </td> 
+                                    <td class="w-20"></td>
+                                    @endif
+
+                        <td class="w-10">
+                            <span class="float-left">
+                                    <a href="/posts/{{ $item->id }}" class="btn btn-primary">مشاهده</a></span>
                         </td>
                     </tr>
                     @empty
@@ -101,8 +113,6 @@
                     @endforelse
                 </table>
             </div>
-
-            
 
         </div>
     </div>

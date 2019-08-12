@@ -6,7 +6,7 @@
 
 @section('content')
     
-<a href="{{ route('pages.admin', Auth::user()->id ) }}" class="btn btn-primary" style="margin-left:40px;">بازگشت</a>
+<a href="{{ route('admin', Auth::user()->id ) }}" class="btn btn-primary" style="margin-left:40px;">بازگشت</a>
 <div style="margin: 20px;">
     <div class="card mx-auto">
         <div class="card-body">
@@ -25,8 +25,10 @@
                 @auth
                 @if (auth()->user()->is_admin)
                 <span class="float-left" style="margin:5px; float:inline-end;">
-                        <a href="/posts/{{ $post->id }}/post" class="fa fa-check" title="تایید"></a></span>
-                        <span class="float-left" style="margin:5px;">
+                    <a href="/posts/{{ $post->id }}/post"  title="تایید"><i class="fa fa-check" aria-hidden="true"></i></a></span>
+                <span class="float-left" style="margin:5px; float:inline-end;">
+                    <a href="/posts/{{ $post->id }}/review" title="ویرایش"><i class="fa fa-edit" aria-hidden="true"></i></a></span>
+                    <span class="float-left" style="margin:5px;">
                         {{ Form::open(['action' => ['PostsController@destroyPost', $post->id], 'method' => 'DELETE']) }}
                         <a class="tooltips" data-toggle="tooltip" data-placement="top" title="حذف">
                             <button type="submit" onclick="return confirm('Are you sure to delete this Post ?');" style="border: 0; background: none;">

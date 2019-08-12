@@ -44,7 +44,8 @@ class DashboardController extends Controller
             return redirect('/');
             Session::flash('error', 'کاربر غیر مجاز');
         }
-        $posts = Post::where('approved', false)->get();
+        $posts = Post::where(['approved' => false, 'review' => false])->get();
+        // dd($posts);
         $comments = Comment::where('approved', false)->get();
         $data = array(
             'posts' => $posts,
@@ -73,9 +74,9 @@ class DashboardController extends Controller
         }
         $user = Auth::user();
         if ($request->about_me) {
-            $str = $request->about_me;
-            if (strlen($str) > 1000) {
-                $about_me = substr($str, 0, 999);
+            $about_me = $request->about_me;
+            if (strlen($about_me) > 1000) {
+                $about_me = substr($about_me, 0, 999);
             }
             $user->about_me = $about_me;
         }

@@ -7,6 +7,7 @@ use Auth;
 use Session;
 // add Post model for using its functions
 use App\Post;
+use App\Like;
 use App\User;
 use App\Comment;
 
@@ -139,6 +140,7 @@ class PostsController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->approved = false;
+        $post->review = false;
         $post->save();
 
         // so we must redirect the page to the posts page
@@ -185,7 +187,7 @@ class PostsController extends Controller
         if (auth()->user()->is_admin) {
             $post->approved = true;
             $post->save();
-            return redirect()->route('pages.admin', Auth::user()->id);
+            return redirect()->route('admin', Auth::user()->id);
             Session::flash('success', 'پست مورد نظر تایید شد');    
         }
         return redirect('/index');
@@ -199,7 +201,7 @@ class PostsController extends Controller
             $post->delete();
 
             // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
-            return redirect()->route('pages.admin', auth()->user()->id);
+            return redirect()->route('admin', auth()->user()->id);
             Session::flash('success', 'پست مورد نظر پاک شد');    
         }
         return redirect('/index');
@@ -207,7 +209,49 @@ class PostsController extends Controller
         // return redirect('pages.index')->with('error', 'کاربر غیر مجاز');
     }
 
+    public function likePost(Request $request) {
+        $post_id = $request['postId'];
+        $is_like = $request['isLike'] === 'true';
+        $update = false;
+        $post = Post::find($post_id);
+        if (!$post) {
+            return null;
+        }
+        $user = Auth::user();
+        $like = $user->likes()->where('post_id', $post_id)->first();
+        if ($like) {
+            $already_like = $like->state;
+            $update = true;
+            if ($already_like == $is_like) {
+                $like->delete();
+                return null;
+            }
+        } else {
+                $like = new Like();
+            }
+            $like->state = $is_like;
+            $like->post_id = $post_id;
+            $like->user_id = $user->id;
+            if ($update) {
+                $like->update();
+            } else {
+                $like->save();
+            }
+            return null;
+    }
 
+    public function postReview($id) {
+        $post = Post::find($id);
+        if ($post) {
+            $post->review = true;
+            $post->update();
+            // dd($post);
+            Session::flash('success', 'پست مورد نظر ارجاع داده شد برای بازبینی');
+            return redirect()->route('admin', Auth::user()->id);
+        }
+        Session::flash('success', 'همچین پستی نداریم');
+        return redirect()->route('admin', Auth::user()->id);
+    }
 
 
 }

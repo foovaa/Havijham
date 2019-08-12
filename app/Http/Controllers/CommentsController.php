@@ -60,7 +60,7 @@ class CommentsController extends Controller
     //         'creator_id' => auth()->user()->id,
     //         'post_id' => $post->id,
     //     ]);
-    //     return redirect()->route('posts.show', $post->id);
+    //     return redirect()->route('show', $post->id);
     // }
 
 
@@ -85,7 +85,7 @@ class CommentsController extends Controller
 
         // so we must redirect the page to the posts page
         Session::flash('success', 'نظر شما پس از بررسی اعمال خواهد شد');
-        return redirect()->route('posts.show', $post);
+        return redirect()->route('show', $post);
 
     }
 
@@ -144,7 +144,7 @@ class CommentsController extends Controller
 
         // so we must redirect the page to the posts page
         Session::flash('message', 'نظر شما پس از بررسی اعمال خواهد شد');
-        return redirect()->route('posts.show', $post);
+        return redirect()->route('show', $post);
     }
 
     /**
@@ -160,12 +160,12 @@ class CommentsController extends Controller
 
         if (auth()->user()->id !== $comment->creator->id) {
             Session::flash('error', 'کاربر غیر مجاز');
-            return redirect()->route('posts.show', $post);
+            return redirect()->route('show', $post);
         }
 
         $comment->delete();
         Session::flash('success', 'کامنت مورد نظر پاک شد');
-        return redirect()->route('posts.show', $post);
+        return redirect()->route('show', $post);
     }
 
 
@@ -180,7 +180,7 @@ class CommentsController extends Controller
                 'comments' => $comments,
             );
             // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
-            return redirect()->route('pages.admin', auth()->user()->id);
+            return redirect()->route('admin', auth()->user()->id);
             Session::flash('success', 'کامنت شما پاک شد');    
         }
         return redirect('/index');
@@ -200,7 +200,7 @@ class CommentsController extends Controller
                 'comments' => $comments,
             );
             // return redirect('/dashboard/{ Auth::user->id }/admin')->with('data', $data);
-            return redirect()->route('pages.admin', auth()->user()->id);
+            return redirect()->route('admin', auth()->user()->id);
             Session::flash('success', 'کامنت تایید شد');    
         }
         return redirect('/index');

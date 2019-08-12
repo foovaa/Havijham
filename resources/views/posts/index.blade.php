@@ -6,7 +6,6 @@
 @endsection
 
 
-
 @section('content')
     <h1>پست ها</h1>
     @forelse ($posts as $item)
@@ -34,7 +33,9 @@
 @empty
     <h2>پستی وجود ندارد</h2>
 @endforelse
-{{ $posts->links() }}
+<ul class="pagination">
+        {{ $posts->links() }}
+</ul>
 @endsection
 
 
