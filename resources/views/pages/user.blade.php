@@ -14,42 +14,24 @@
             {{-- This Profile shower --}}
             <div class="card">
                 {{-- <div class="profile"> --}}
-                        <div class="card-header" style="margin:20px; display: block; min-width:60px;"><strong style="margin-top:10px; font-size:20px; maargin-right:30px;"> داشبورد</strong>
-                                    <figure>
-                                            <img src="/storage/avatar/{{ $data['user']->avatar }}" style="width:130px; height:130px; float:right; border-radius:50%; margin:10px; margin-right:30px;">                    
-                                            <figcaption>
-                                                    <br><small>    نام</small>
-                                                    <br><strong>   {{ $data['user']->name }}</strong>
-                                                    {{-- <br><small>    ایمیل</small><br> --}}
-                                                    {{-- <strong>   {{ Auth::user()->email }}</strong> --}}
-                                            </figcaption>
-                                        </figure>  
-                                     
-                                    <table>
-                                            <tr>
-                                                <td class="w-100">
-                                                    <div class="card-text" style="margin:15px;">
-                                                    <h4 class="card-title"><strong style="color:blue;">درباره من :<br></strong> {{ $data['user']->about_me }}</h4>
-                                                </td>
-                                            </tr>
-                                        </table>        
-        
+                    <div class="card-header" style="margin:20px; display: block; min-width:60px;"><strong style="margin-top:10px; font-size:20px; maargin-right:30px;"> داشبورد</strong>
+                        <div style="display: block; margin-bottom: 20px;">
+                        <figure>
+                            <img src="/storage/avatar/{{ $data['user']->avatar }}" style="width:130px; height:130px; float:right; border-radius:50%; margin:10px; margin-right:30px;">                    
+                                <figcaption>
+                                    <br><small>    نام</small>
+                                    <br><strong>   {{ $data['user']->name }}</strong>
+                                    {{-- <br><small>    ایمیل</small><br> --}}
+                                    {{-- <strong>   {{ Auth::user()->email }}</strong> --}}
+                                </figcaption>
+                        </figure>  </div>
+                        <div style="display: block;">
+                            درباره من<br><p> {{ $data['user']->about_me }} </p>
+                            </div>      
                     </div>
-
-        
                 </div>
-                <div class="card-header" style="margin-top:20px;" >
-                </div>
-
             <div class="card-body">
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-
-                {{-- This section is Posts Table --}}
+<h3>پست ها </h3>                {{-- This section is Posts Table --}}
                 <table class="table table-striped">
                     <tr class="row">
                         <td class="w-50">عنوان</td>
@@ -70,9 +52,6 @@
                     @endforelse
                 </table>
             </div>
-
-            
-
         </div>
     </div>
 </div>

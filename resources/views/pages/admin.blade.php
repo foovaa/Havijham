@@ -1,9 +1,14 @@
 @extends('layouts.app')
 
+@section('keywords')
+    <meta name="keywords" content=",هویج هام,برنامه نویسی,صفحه ادمین">
+@endsection
 
 @section('title')
 ادمین         
 @endsection
+
+
 
 @section('content')
 @if (Auth::user()->is_admin) 
@@ -44,7 +49,7 @@
                             {{ Form::hidden('_method', 'DELETE')}}
                                 <span class="float-left mx-auto"> 
                                     <a class="tooltips" data-toggle="tooltip" data-placement="top" title="Delete">
-                                        <button type="submit" onclick="return confirm('Are you sure to delete this comment ?');" style="border: 0; background: none;">
+                                        <button type="submit" onclick="return confirm('این نظر رو حذف می کنید ؟');" style="border: 0; background: none;">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                 

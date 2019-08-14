@@ -15,6 +15,10 @@
         {{ Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'عنوان']) }}
     </div>
     <div class="form-group">
+        {{ Form::label('tag', 'تگ ها') }}
+        {{ Form::text('tag', '', ['class' => 'form-control', 'placeholder' => 'حداکثر شش تگ ...']) }}
+    </div>
+    <div class="form-group">
             {{ Form::label('body', 'محتوا') }}
             {{ Form::textarea('body', '', ['class' => 'form-control', 'rows' => '20', 'placeholder' => 'محتوا...']) }}            
             {{-- {{ Form::textarea('body', '', ['class' => 'ckeditor', 'placeholder' => 'Body...']) }} --}}

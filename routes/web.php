@@ -29,6 +29,7 @@ Route::get('/users/{user_id}', 'PagesController@user')->name('user');
 // artisan comand => make:controller PostsController --resource
 Route::resource('/posts', 'PostsController');
 Route::get('/posts/{post}', ['uses' => 'PostsController@show', 'as' => 'show']);
+// Route::get('/post/{comment_id}/edit', ['uses' => 'CommentsController@update', 'as' => 'editComment']);
 
 // Like
 Route::post('/like', ['uses' => 'PostsController@likePost' , 'as' => 'like']);
@@ -37,11 +38,13 @@ Route::post('/like', ['uses' => 'PostsController@likePost' , 'as' => 'like']);
 Route::get('posts/{post_id}/show', 'PostsController@postShow');
 Route::get('posts/{post_id}/post', 'PostsController@postApprove');
 Route::get('posts/{post_id}/review', 'PostsController@postReview');
-Route::delete('comments/{comment_id}/destroyComment', 'CommentsController@destroyComment');
 Route::delete('posts/{post_id}/destroyPost', 'PostsController@destroyPost');
 
 
 Route::resource('/comment', 'CommentsController');
+Route::get('comments/{comment_id}/comment', 'CommentsController@commentApprove');
+Route::delete('comments/{comment_id}/destroyComment', 'CommentsController@destroyComment');
+
 
 Auth::routes();
 
@@ -51,7 +54,6 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/dashboard/{user_id}/admin',['uses' => 'DashboardController@admin', 'as' => 'admin'] );
 
 
-Route::get('comments/{comment_id}/comment', 'CommentsController@commentApprove');
 
 
 

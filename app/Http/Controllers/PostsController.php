@@ -10,6 +10,7 @@ use App\Post;
 use App\Like;
 use App\User;
 use App\Comment;
+use App\Tag;
 
 // this controller made with command:
 // php artisan make:controller PostsController --resource
@@ -64,15 +65,26 @@ class PostsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
+            'tag' => 'required',
         ]);
         // after validation we must create a post
         // and assign the values to that
         $post = new Post();
+        $data   = preg_split('/\s+/', $request->tag);
+        // dd($data);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->user_id = auth()->user()->id;
         $post->save();
-
+        $counter = 0;
+        foreach ($data as $item) {
+            if ($counter > 5) break;
+            $tag = new Tag();
+            $tag->tag = substr($item, 0, 30);
+            $tag->post_id = $post->id;
+            $tag->save();
+            $counter++;
+        }
         // so we must redirect the page to the posts page
         Session::flash('success', 'پست شما پس از بررسی در سایت قرار می گیرد');
         return redirect('dashboard')->with('user', Auth::user());
@@ -99,6 +111,7 @@ class PostsController extends Controller
         // foreach ($post->comments->all() as $item ) {
         //     echo "{$item->creator->name}";
         // }
+        // dd($post->comments);
         return view('posts.show')->with('post', $post);
     }
 

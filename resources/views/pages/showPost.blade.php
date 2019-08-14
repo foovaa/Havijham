@@ -31,7 +31,7 @@
                     <span class="float-left" style="margin:5px;">
                         {{ Form::open(['action' => ['PostsController@destroyPost', $post->id], 'method' => 'DELETE']) }}
                         <a class="tooltips" data-toggle="tooltip" data-placement="top" title="حذف">
-                            <button type="submit" onclick="return confirm('Are you sure to delete this Post ?');" style="border: 0; background: none;">
+                            <button type="submit" onclick="return confirm('این پست را حذف می کنید؟');" style="border: 0; background: none;">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                         </a>

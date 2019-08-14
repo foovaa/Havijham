@@ -29,4 +29,9 @@ class Post extends Model
     public function likes() {
         return $this->hasMany('App\Like');
     }
+
+
+    public function tags() {
+        return $this->hasMany('App\Post');
+    }
 }

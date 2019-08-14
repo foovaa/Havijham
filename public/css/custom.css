@@ -17,6 +17,15 @@
     margin: 10px;
 }
 
+
+
+.alert-message {
+  color: #1b4b72;
+  background-color: #c7e7ff;
+  border-color: #b9defc;
+}
+
+
 .w-10 {
   width: 10% !important;
 }

@@ -112,7 +112,8 @@ class CommentsController extends Controller
 
         // check for unauthorized user
         if (auth()->user()->id !== $comment->creator->id) {
-            return view('posts.editcommit')->with('error', 'کاربر غیر مجاز');
+            Session::flash('error', 'کاربر غیر مجاز');
+            return redirect()->route('show', $comment->post);
         }
         return view('posts.editComment')->with('comment', $comment);
     }
@@ -128,23 +129,17 @@ class CommentsController extends Controller
     {
         $this->validate($request, [
             'content' => 'required',
-            'creator_id' => 'required',
-            'post_id' => 'required',
         ]);
         // after validation we must create a post
         // and assign the values to that
-        $post = Post::find($request->post_id);
         $comment = Comment::find($id);
-        // return $post;
         $comment->content = $request->content;
-        $comment->creator_id = $request->creator_id;
-        $comment->post_id = $request->post_id;
         $comment->approved = false;
-        $comment->save();
+        $comment->update();
 
         // so we must redirect the page to the posts page
         Session::flash('message', 'نظر شما پس از بررسی اعمال خواهد شد');
-        return redirect()->route('show', $post);
+        return redirect()->route('show', $comment->post);
     }
 
     /**

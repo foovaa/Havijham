@@ -14,7 +14,6 @@ class Comment extends Model
     protected $fillable = ['content'];
 
 
-
     // table
     protected $table = 'comments';
     // primary key

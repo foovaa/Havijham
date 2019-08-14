@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 
+
+@section('keywords')
+    <meta name="keywords" content="هویج هام,{{Auth::user()->name}},داشبورد, برنامه نویسی">
+@endsection
+
+
 @section('title')
 داشبورد {{ auth()->user()->name }}
 @endsection
@@ -98,7 +104,7 @@
                                 </td>
                                 @else
                                     <td class="w-15">
-                                            <span class="float-right" style="color:yellow;">بررسی نشده</span>
+                                            <span class="float-right">بررسی نشده</span>
                                     </td> 
                                     <td class="w-20"></td>
                                     @endif
