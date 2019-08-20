@@ -7,44 +7,36 @@
 
 @section('content')
 
-    {{-- we use controllers so instead of using 'url' we use 'action' and 'method'  --}}
     {{ Form::open(['action' => 'PostsController@store', 'method' => 'POST']) }}
     {{ Form::token() }}
     <div class="form-group">
         {{ Form::label('title', 'عنوان') }}
         {{ Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'عنوان']) }}
     </div>
-    <div class="form-group">
-        {{ Form::label('tag', 'تگ ها') }}
-        {{ Form::text('tag', '', ['class' => 'form-control', 'placeholder' => 'حداکثر شش تگ ...']) }}
+
+
+    <div class="form-group" style="border:0px;">
+        {{ Form::label('tags', 'تگ ها')}}
+        <select multiple="multiple" class="form-control" aria-placeholder="تگ ها" >
+            @foreach ($tags as $item)
+                <option value="{{ $item->id }}"> {{ $item->tag }} </option>
+            @endforeach
+        </select>
     </div>
+
     <div class="form-group">
             {{ Form::label('body', 'محتوا') }}
             {{ Form::textarea('body', '', ['class' => 'form-control', 'rows' => '20', 'placeholder' => 'محتوا...']) }}            
             {{-- {{ Form::textarea('body', '', ['class' => 'ckeditor', 'placeholder' => 'Body...']) }} --}}
     </div>
-    {{ Form::submit('ارسال', ['class' => 'btn btn-primary'])}}
+    {{ Form::submit('ارسال', ['class' => 'btn btn-primary']) }}
     {{ Form::close() }}
 
 
 <pre>
-    <div  id="preview">Preview</div>
+    <div id="preview" style="min-height: 60px;">پیش نمایش</div>
 </pre>
 
-<script>
-    $(document).ready(function(){
-        var textinput = document.getElementById('body');
-    textinput.onkeyup = textinput.onkeypress = function(){
-        document.getElementById('preview').innerHTML = this.value;
-    }
-    });
 
-    // $(document).ready(function(){
-    //         $('#body').keyup(function() {
-    //             $('#tb2').val($('#body').val());
-    //         });
-    //     });
-</script>
-    <div>
-</div>
+
 @endsection

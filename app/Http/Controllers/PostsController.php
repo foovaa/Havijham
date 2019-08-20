@@ -51,7 +51,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $tags = Tag::all();
+        // dd($tags);
+        return view('posts.create')->withTags($tags);
     }
 
     /**
@@ -65,26 +67,26 @@ class PostsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
-            'tag' => 'required',
+            // 'tag' => 'required',
         ]);
         // after validation we must create a post
         // and assign the values to that
         $post = new Post();
-        $data   = preg_split('/\s+/', $request->tag);
+        // $data   = preg_split('/\s+/', $request->tag);
         // dd($data);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->user_id = auth()->user()->id;
         $post->save();
-        $counter = 0;
-        foreach ($data as $item) {
-            if ($counter > 5) break;
-            $tag = new Tag();
-            $tag->tag = substr($item, 0, 30);
-            $tag->post_id = $post->id;
-            $tag->save();
-            $counter++;
-        }
+        // $counter = 0;
+        // foreach ($data as $item) {
+        //     if ($counter > 5) break;
+        //     $tag = new Tag();
+        //     $tag->tag = substr($item, 0, 30);
+        //     $tag->post_id = $post->id;
+        //     $tag->save();
+        //     $counter++;
+        // }
         // so we must redirect the page to the posts page
         Session::flash('success', 'پست شما پس از بررسی در سایت قرار می گیرد');
         return redirect('dashboard')->with('user', Auth::user());

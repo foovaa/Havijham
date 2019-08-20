@@ -24,14 +24,19 @@
                     </figure>
                 </div>
                 <div class="card-text" style="margin:15px;">
-                    <h4 class="card-title"><strong style="color:blue;">درباره من :</strong>
-                        <?php 
-                            if(strlen($item->about_me) > 300) {
-                            echo substr($item->about_me, 0, 300).' ...';
-                        } else {
-                            echo $item->about_me;
-                        }
-                            ?></h4>
+                    <h5 class="card-title"><small style="color:blue;">درباره من :</small><br>
+                        @if ( $item->about_me )
+                            <?php 
+                                if(strlen($item->about_me) > 300) {
+                                echo substr($item->about_me, 0, 300).' ...';
+                            } else {
+                                echo $item->about_me;
+                            }
+                            ?>
+                            @else
+                            <p>فعلا نمی خوام در مورد من چیزی بدونید...</p>
+                        @endif
+                            </h5>
                     {{-- <hr> --}}
                 {{-- <small>{{ $item->created_at->format('Y M D') }}</small> --}}
                 </div>

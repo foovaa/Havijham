@@ -52,7 +52,7 @@ Auth::routes();
 // Dashboard and adminstration 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/dashboard/{user_id}/admin',['uses' => 'DashboardController@admin', 'as' => 'admin'] );
-
+Route::get('/dashboard/post/{post_id}', 'DashboardController@writterShow');
 
 
 

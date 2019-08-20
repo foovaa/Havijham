@@ -9,6 +9,9 @@
     margin: 20px;
     display: block;
 }
+.limitedNumbChosen, .limitedNumbSelect2{
+  width: 400px;
+}
 
 .about-me {
     max-width: 800px;
@@ -17,6 +20,12 @@
     margin: 10px;
 }
 
+@media screen and (max-width: 600px) {
+  .sidenav {
+  display: none;
+
+  }
+}
 
 
 .alert-message {
@@ -46,6 +55,40 @@
 .w-20 {
   width: 20% !important;
 }
+
+
+.sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+
+
+
+
+
+
+
+
 /*
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 @import url('/public/fonts/iransans.ttf'); 
@@ -10752,28 +10795,12 @@ code {
 }
 
 
-.wrapper {
-  display: grid;
-  grid-template-columns: 15% 85%;
-  grid-column-gap: 10px;
-  text-align: center;
-  /* margin: 10px; */
-  /* margin: 10px; */
-}
 
-.wrapper > div {
-  margin: 10px;
-  display: flex;
-}
 
-.wrapper > div:nth-child(even) {
-  text-align: right;
-  display: inline-block;
-}
 
 
 
 
   
 
- */
+ 

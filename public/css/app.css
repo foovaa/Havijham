@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
-@charset "UTF-8";
-@rule ;
+/* @charset "UTF-8"; */
+
 
 
 /*!
@@ -40,7 +40,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: 'iransans', "Nunito", sans-serif;
+  --font-family-sans-serif: "iransans", "Nunito", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -72,7 +72,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "iransans", "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.6;
@@ -209,7 +209,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: iransans ,SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: "iransans" ,SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 1em;
 }
 
@@ -247,7 +247,7 @@ caption {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   color: #6c757d;
-  text-align: right
+  text-align: right;
   caption-side: bottom;
 }
 
@@ -3291,7 +3291,7 @@ input[type=button].btn-block {
   margin: 0.125rem 0 0;
   font-size: 0.9rem;
   color: #212529;
-  text-align: right
+  text-align: right;
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
@@ -6176,8 +6176,7 @@ a.close.disabled {
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
-  text-align: right
-  text-align: start;
+  text-align: right;
   text-decoration: none;
   text-shadow: none;
   text-transform: none;
@@ -6301,8 +6300,7 @@ a.close.disabled {
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
-  text-align: right
-  text-align: start;
+  text-align: right;
   text-decoration: none;
   text-shadow: none;
   text-transform: none;

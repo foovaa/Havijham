@@ -8,7 +8,7 @@
 @section('content')
 
 {{-- This part showes the Post title and body --}}
-<a href="/posts" class="btn btn-primary" style="margin-left:40px;">بازگشت</a>
+<a href="{{ route('dashboard') }}" class="btn btn-primary" style="margin-left:40px;">بازگشت</a>
 <div style="margin: 20px;">
     <div class="card mx-auto">
         <div class="card-body">

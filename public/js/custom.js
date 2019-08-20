@@ -18,3 +18,32 @@ $('.like').on('click', function(event){
     });
 
 });
+
+
+
+$('select').select2({
+    maximumInputLength: 30 , // only allow terms up to 20 characters long
+    tags: true ,
+});
+
+
+
+
+
+
+$(document).ready(function(){
+    var textinput = document.getElementById('body');
+textinput.onkeyup = textinput.onkeypress = function(){
+    document.getElementById('preview').innerHTML = this.value;
+    }   
+});
+
+
+// .done(function() {
+//     event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You Like' : 'Like' : event.target.innerText == 'Dislike' ? 'you dont like' : 'Dislike';
+//     if (isLike) {
+//         event.target.nextElementSibling.innerText = 'Dislike';
+//     } else {
+//         event.target.previousElementSibling.innerText = 'Like';
+//     }
+// });

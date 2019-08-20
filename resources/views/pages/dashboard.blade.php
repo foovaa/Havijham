@@ -68,58 +68,86 @@
                     </div>
                 @endif
 
-                <div style="margin:10px;">
+                <div style="margin:10px; display:block;">
                     <div class="float-right" style="margin-bottom:20px;">
                         <a href="/posts/create" class="btn btn-primary">ایجاد پست</a>
                     </div>
-                </div>
-
+                </div><br><br>
+<div>
                 {{-- This section is Posts Table --}}
-                <table class="table table-striped">
-                    <tr class="row">
-                        <td class="w-40">عنوان</td>
-                        <td class="w-15">در تاریخ</td>
-                        <td class="w-15">وضعیت</td>
-                        <td class="w-20">پیام</td>
-                        <td class="w-10"></td>
-                    </tr>
-
-                    @forelse ($user->posts as $item)
-                    <tr class="row">
-                        <td class="card-title w-40"><strong>{{ $item->title }}</strong></td>
-                        <td class="w-15"><small>{{ $item->created_at->format('Y D M') }}</small></td>
-                            @if ( $item->approved )
-                                <td class="w-15">
-                                        <span class="float-right" style=" color:blue;">بررسی شده</span>
-                                </td>
-                                <td class="w-20">
-                                    <span class="float-right" style="color:green;">تایید شد</span>
-                                </td>
-                            @elseif ($item->review) 
-                                <td class="w-15">
-                                        <span class="float-right" style="color:blue;">بررسی شده</span>
-                                </td>
-                                <td class="w-20">
-                                    <span class="float-right" style="color:red;">برای بازبینی</span>
-                                </td>
-                                @else
-                                    <td class="w-15">
+                <h2>پست های شما</h2>
+                @forelse ($user->posts as $item)
+                    <table class="table table-striped">
+                        <tr class="row">
+                            <td class="w-40">عنوان</td>
+                            <td class="w-15">در تاریخ</td>
+                            <td class="w-15">وضعیت</td>
+                            <td class="w-20">پیام</td>
+                            <td class="w-10"></td>
+                        </tr>
+                        <tr class="row">
+                            <td class="card-title w-40"><strong>{{ $item->title }}</strong></td>
+                                <td class="w-15"><small>{{ $item->created_at->format('Y D M') }}</small></td>
+                                    @if ( $item->approved )
+                                        <td class="w-15">
+                                            <span class="float-right" style=" color:blue;">بررسی شده</span>
+                                        </td>
+                                        <td class="w-20">
+                                            <span class="float-right" style="color:green;">تایید شد</span>
+                                        </td>
+                                    @elseif ($item->review) 
+                                        <td class="w-15">
+                                            <span class="float-right" style="color:blue;">بررسی شده</span>
+                                        </td>
+                                        <td class="w-20">
+                                            <span class="float-right" style="color:red;">برای بازبینی</span>
+                                        </td>
+                                    @else
+                                        <td class="w-15">
                                             <span class="float-right">بررسی نشده</span>
-                                    </td> 
-                                    <td class="w-20"></td>
+                                        </td> 
+                                        <td class="w-20"></td>
                                     @endif
-
                         <td class="w-10">
                             <span class="float-left">
-                                    <a href="/posts/{{ $item->id }}" class="btn btn-primary">مشاهده</a></span>
+                                <a href="dashboard/post/{{ $item->id }}" class="btn btn-primary">مشاهده</a></span>
                         </td>
                     </tr>
+                    </table>
                     @empty
-                        <td>شما تا حالا پستی ننوشته اید</td>
+                        شما تا حالا پستی ننوشته اید
                     @endforelse
-                </table>
+                </div>
             </div>
 
+        <h3>شما این پست هارو دوست داشتید</h3>
+            @forelse ($user->likes->all() as $like)
+                @if ( $like->state )
+                <div style="margin : 20px;">
+                    <div class="card">
+                        <div class="wrapper">
+                            <div>
+                                <figure>
+                                    <img src="/storage/avatar/{{ $like->post->user->avatar }}" style="width:70px; height:70px; margin:5px; border-radius:50%;" alt="">
+                                    <figcaption>
+                                        {{ $like->post->user->name }}              
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="card-text" style="margin:15px;">
+                                <h4 class="card-title"><strong style="color:blue;">عنوان:</strong> {{ $like->post->title }}</h4>
+                                <hr>
+                            <small>{{ $like->post->created_at->format('Y M D') }}</small>
+                            <span class="float-left" style="margin:5px; float:inline-end;">
+                                <a href="/posts/{{ $like->post->id }}" class="btn btn-primary">مشاهده</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>                        
+            @endif
+        @empty
+        شماتا حالا پستی رو دوست نداشتید
+        @endforelse
         </div>
     </div>
 </div>

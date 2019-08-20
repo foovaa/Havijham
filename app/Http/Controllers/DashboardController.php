@@ -62,7 +62,15 @@ class DashboardController extends Controller
 
     public function update(Request $request) {
         // in here we need interventioni/image
+        $this->validate($request, [
+            'avatar' => 'mimes:jpeg,png,bmp,tiff |max:1999',
+        ], 
+          $messages = [
+            'mimes' => 'فورمت های عکس jpeg, png, bmp فقط قبوله.'
+        ]
+    );
         if ($request->hasFile('avatar')) {
+
             if (Auth::user()->avatar !== 'default.svg') {
                 Storage::delete('/public/avatar/'.Auth::user()->avatar);
             }
@@ -86,5 +94,16 @@ class DashboardController extends Controller
         return redirect()->route('dashboard', Auth::user());
         // return view('pages.dashboard')->with('user', Auth::user());
     }
+
+
+    public function writterShow($id) {
+        $post = Post::find($id);
+        if ($post && Auth::user()->id == $post->user->id) {
+            return view('posts/writterShow')->withPost($post);
+        }
+        Session::flash('error', 'کاربر غیر مجاز');
+        return redirect('/');
+    }
+
 
 }

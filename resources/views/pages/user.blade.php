@@ -24,33 +24,37 @@
                                     {{-- <br><small>    ایمیل</small><br> --}}
                                     {{-- <strong>   {{ Auth::user()->email }}</strong> --}}
                                 </figcaption>
-                        </figure>  </div>
-                        <div style="display: block;">
-                            درباره من<br><p> {{ $data['user']->about_me }} </p>
-                            </div>      
+                        </figure>  
+                    </div>
+
                     </div>
                 </div>
+                <div class="card-header" style="margin-top:20px;" >
+                    <strong>درباره من</strong><br><br>
+                    <?php echo nl2br($data['user']->about_me) ?>
+                </div>
             <div class="card-body">
-<h3>پست ها </h3>                {{-- This section is Posts Table --}}
-                <table class="table table-striped">
-                    <tr class="row">
-                        <td class="w-50">عنوان</td>
-                        <td class="w-25">تاریخ نگارش پست</td>
-                        <td class="w-25"></td>
-                    </tr>
-                    @forelse ($data['posts']->all() as $item)
-                    <tr class="row">
-                        <td class="card-title w-50"><strong>{{ $item->title }}</strong></td>
-                        <td class="w-25">{{ $item->created_at->format('Y D M') }}</td>
-                        <td class="w-25">
-                            <span class="float-left" style="margin:5px; float:inline-end;">
-                                <a href="/posts/{{ $item->id }}" class="btn btn-primary">مشاهده</a></span>
-                        </td>
-                    </tr>
-                    @empty
-                        <td>شما تا حالا پستی ننوشته اید</td>
-                    @endforelse
-                </table>
+<h3>پست ها </h3>
+                {{-- This section is Posts Table --}}
+                @forelse ($data['posts']->all() as $item)
+                    <table class="table table-striped">
+                        <tr class="row">
+                            <td class="w-50">عنوان</td>
+                            <td class="w-25">تاریخ نگارش پست</td>
+                            <td class="w-25"></td>
+                        </tr>
+                        <tr class="row">
+                            <td class="card-title w-50"><strong>{{ $item->title }}</strong></td>
+                            <td class="w-25">{{ $item->created_at->format('Y D M') }}</td>
+                            <td class="w-25">
+                                <span class="float-left" style="margin:5px; float:inline-end;">
+                                    <a href="/posts/{{ $item->id }}" class="btn btn-primary">مشاهده</a></span>
+                            </td>
+                        </tr>
+                    </table>
+                @empty
+                {{ $data['user']->name }} هنوز پستی ننوشته !!
+                @endforelse
             </div>
         </div>
     </div>
