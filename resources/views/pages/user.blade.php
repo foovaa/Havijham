@@ -22,7 +22,7 @@
                                     <br><small>    نام</small>
                                     <br><strong>   {{ $data['user']->name }}</strong>
                                     {{-- <br><small>    ایمیل</small><br> --}}
-                                    {{-- <strong>   {{ Auth::user()->email }}</strong> --}}
+                                    {{-- <strong>   {{ Auth::user()->email }}</strong> --}} 
                                 </figcaption>
                         </figure>  
                     </div>

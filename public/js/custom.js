@@ -19,7 +19,7 @@ $('.like').on('click', function(event){
 
 });
 
-
+ 
 
 $('select').select2({
     maximumInputLength: 30 , // only allow terms up to 20 characters long

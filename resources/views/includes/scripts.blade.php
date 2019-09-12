@@ -8,11 +8,17 @@
     })(window,document,'script','dataLayer','GTM-MD9QJ9S');</script>
 <!-- End Google Tag Manager -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script> --}}
+
+
+
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
 
 
 {{-- select2 --}}
 <script src="{{ asset('js/select2.min.js') }}" defer></script>
-
 <script src="{{ asset('js/custom.js') }}" defer></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+

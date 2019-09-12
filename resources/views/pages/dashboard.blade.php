@@ -76,8 +76,8 @@
 <div>
                 {{-- This section is Posts Table --}}
                 <h2>پست های شما</h2>
-                @forelse ($user->posts as $item)
-                    <table class="table table-striped">
+                @if (count($user->posts) > 0)
+                <table class="table table-striped">
                         <tr class="row">
                             <td class="w-40">عنوان</td>
                             <td class="w-15">در تاریخ</td>
@@ -85,6 +85,8 @@
                             <td class="w-20">پیام</td>
                             <td class="w-10"></td>
                         </tr>
+                        @foreach ($user->posts as $item)
+
                         <tr class="row">
                             <td class="card-title w-40"><strong>{{ $item->title }}</strong></td>
                                 <td class="w-15"><small>{{ $item->created_at->format('Y D M') }}</small></td>
@@ -112,12 +114,17 @@
                             <span class="float-left">
                                 <a href="dashboard/post/{{ $item->id }}" class="btn btn-primary">مشاهده</a></span>
                         </td>
-                    </tr>
-                    </table>
-                    @empty
-                        شما تا حالا پستی ننوشته اید
-                    @endforelse
-                </div>
+                        @endforeach
+                </tr>
+            </table>
+@else 
+شما هنوز پستی ننوشته اید
+@endif                
+
+
+
+</div>
+
             </div>
 
         <h3>شما این پست هارو دوست داشتید</h3>

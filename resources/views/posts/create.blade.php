@@ -17,12 +17,20 @@
 
     <div class="form-group" style="border:0px;">
         {{ Form::label('tags', 'تگ ها')}}
-        <select multiple="multiple" class="form-control" aria-placeholder="تگ ها" >
+        <select multiple class="form-control" size="4" tabindex="1" name="tags[]" >
             @foreach ($tags as $item)
                 <option value="{{ $item->id }}"> {{ $item->tag }} </option>
             @endforeach
         </select>
     </div>
+{{-- 
+    <select class="form-control" multiple="multiple" name="tag_id">
+        @foreach ($tags as $key => $value)
+          <option value="{{ $key }}"> 
+              {{ $value->tag }} 
+          </option>
+        @endforeach    
+      </select> --}}
 
     <div class="form-group">
             {{ Form::label('body', 'محتوا') }}
@@ -38,5 +46,19 @@
 </pre>
 
 
+<script>
+    $('select').select2({
+        maximumInputLength: 30 , // only allow terms up to 20 characters long
+        tags: true ,
+    });
+    
+    $(document).ready(function(){
+        var textinput = document.getElementById('body');
+    textinput.onkeyup = textinput.onkeypress = function(){
+        document.getElementById('preview').innerHTML = this.value;
+        }   
+    });
+    </script>
+    
 
 @endsection

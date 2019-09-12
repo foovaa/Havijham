@@ -53,7 +53,7 @@ class PostsController extends Controller
     {
         $tags = Tag::all();
         // dd($tags);
-        return view('posts.create')->withTags($tags);
+        return view('posts.create')->with('tags', $tags);
     }
 
     /**
@@ -67,13 +67,13 @@ class PostsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
-            // 'tag' => 'required',
+            'tags' => 'required',
         ]);
         // after validation we must create a post
         // and assign the values to that
         $post = new Post();
         // $data   = preg_split('/\s+/', $request->tag);
-        // dd($data);
+        dd($request->tags);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->user_id = auth()->user()->id;

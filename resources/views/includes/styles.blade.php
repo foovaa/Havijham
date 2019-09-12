@@ -3,6 +3,9 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
 
+{{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" /> --}}
+{{--  --}}
+
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
